@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Entry Message
+    - run: Start build job
     - uses: actions/checkout@v2
     - name: Run prepublish
       run: npm run vscode:prepublish
