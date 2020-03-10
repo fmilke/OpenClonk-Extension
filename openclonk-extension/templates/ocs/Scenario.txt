@@ -1,7 +1,7 @@
 [Head]
 Icon=15
 Title=GoldRush
-Version=6,0
+Version=8,0
 Difficulty=10
 
 [Definitions]
@@ -30,4 +30,3 @@ MapHeight=75
 Climate=0
 YearSpeed=0
 Wind=0,100,-100,100
- 

@@ -105,6 +105,10 @@
 					"include": "#typedparam"
 				},
 				{
+					"match": "([a-zA-Z]\\w*)",
+					"name": "variable.parameter"
+				},
+				{
 					"match": "\\s*,\\s*",
 					"name": "punctuation"
 				},

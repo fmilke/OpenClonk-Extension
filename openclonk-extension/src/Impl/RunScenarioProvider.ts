@@ -13,7 +13,7 @@ export class RunScenarioProvider implements IRunScenarioProvider {
             return;
         }
 
-        this.execute([`"${pathToScenario}"`], outputChannel);
+        this.execute([`${pathToScenario}`], outputChannel);
     }
 
     private execute(args: string[], outputChannel: OutputChannel) {

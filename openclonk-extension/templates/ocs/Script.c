@@ -5,10 +5,6 @@
 	@author Maikel
 */
 
-
-// Whether the intro has been initialized.
-static intro_init;
-
 protected func Initialize()
 {
 	// Show wealth in HUD.
@@ -67,22 +63,6 @@ protected func InitializePlayer(int plr)
 	
 	// Harsh zoom range.
 	SetPlayerZoomByViewRange(plr, 500, nil, PLRZOOM_Direct | PLRZOOM_LimitMax);
-	SetPlayerViewLock(plr, true);
-	
-	// Give the player basic knowledge.
-	GivePlayerBasicKnowledge(plr);
-	GivePlayerSpecificKnowledge(plr, [Idol]);
-	
-	// Give the player the elementary base materials and some tools.
-	GivePlayerElementaryBaseMaterial(plr);
-	GivePlayerToolsBaseMaterial(plr);
-	
-	// Initialize the intro sequence if not yet started.
-	if (!intro_init)
-	{
-		StartSequence("Intro", 0);
-		intro_init = true;
-	}
 	return;
 }
 
@@ -156,18 +136,3 @@ private func InitMaterial(int amount)
 	}
 	return;
 }
-
-
-/*-- Helper functions --*/
-
-global func TestGoldCount()
-{
-	var pos;
-	while (pos = FindLocation(Loc_Material("Gold")))
-	{
-		var pos = CreateObjectAbove(Rock, pos.x, pos.y)->Explode(100);
-	}
-	var gold_count = ObjectCount(Find_ID(Nugget));
-	return gold_count;
-}
-

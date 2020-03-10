@@ -2,10 +2,17 @@
 	"name": "openclonk-extension",
 	"displayName": "OpenClonk Extension",
 	"description": "Development Tools for OpenClonk",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"repository": {
 		"url": "https://github.com/fmilke/OpenClonk-Extension"
 	},
+	"keywords": [
+		"clonk",
+		"openclonk",
+		"c4group",
+		"game"
+	],
+	"icon": "./images/icon.png",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
@@ -14,7 +21,10 @@
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"*"
+		"onLanguage:ocs",
+		"workspaceContains:**/*.ocd",
+		"workspaceContains:**/*.ocs",
+		"workspaceContains:**/*.ocg"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -22,18 +32,12 @@
 			"title": "OpenClonk Language",
 			"properties": {
 				"oc-ext.pathToC4gExecutable": {
-					"type": [
-						"string",
-						"null"
-					],
+					"type": "string",
 					"format": "uri",
 					"description": "Path to C4group Executable, which is used to pack/unpack .oc* files"
 				},
 				"oc-ext.pathToGameExecutable": {
-					"type": [
-						"string",
-						"null"
-					],
+					"type": "string",
 					"format": "uri",
 					"description": "Path to Game Executable, which is used to run scenarios"
 				}
