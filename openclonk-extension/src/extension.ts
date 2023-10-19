@@ -1,19 +1,15 @@
 import * as vscode from 'vscode';
-import { IC4groupProvider } from './Ifaces/IC4GroupProvider';
-import { C4GroupProvider } from './Impl/C4GroupProvider';
-import { IRunScenarioProvider } from './Ifaces/IRunScenarioProvider';
-import { RunScenarioProvider } from './Impl/RunScenarioProvider';
-import { ITemplateCreator } from './Ifaces/ITemplateCreator';
-import { TemplateCreator } from './Impl/TemplateCreator';
-import { ITemplateSelection } from './Ifaces/ITemplateSelection';
-import { TemplateSelection } from './Impl/TemplateSelection';
+import { C4GroupProvider } from './services/C4GroupProvider';
+import { ScenarioRunner } from './services/ScenarioRunner';
+import { TemplateCreator } from './services/TemplateCreator';
+import { TemplateSelection } from './services/TemplateSelection';
 
 export function activate(context: vscode.ExtensionContext) {
-	const provider: IC4groupProvider = new C4GroupProvider();
-	const runScenarioProvider: IRunScenarioProvider = new RunScenarioProvider();
-	const templateCreator: ITemplateCreator = new TemplateCreator();
-	const templateSelection: ITemplateSelection = new TemplateSelection();
 	const outputChannel = vscode.window.createOutputChannel('OpenClonk');
+	const provider = new C4GroupProvider(outputChannel);
+	const runScenarioProvider = new ScenarioRunner();
+	const templateCreator = new TemplateCreator();
+	const templateSelection = new TemplateSelection();
 
 	context.subscriptions.push(vscode.commands.registerCommand('oc-ext.unpackC4g', ({ fsPath }) => {
 		provider.unpack(fsPath)
@@ -26,11 +22,11 @@ export function activate(context: vscode.ExtensionContext) {
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('oc-ext.runScenarioInEditor', ({ fsPath }) => {
-		runScenarioProvider.runScenarioInEditorMode(fsPath, outputChannel);
+		runScenarioProvider.run(fsPath, outputChannel);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('oc-ext.createScenario', async ({ fsPath }) => {
-		const result = await templateSelection.selectTemplate();
+		const result = await templateSelection.select();
 		
 		if (result) {
 			await templateCreator.createFromTemplate(result.templateDef, context.extensionPath, result.itemName, fsPath);

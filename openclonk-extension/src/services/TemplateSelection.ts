@@ -1,4 +1,3 @@
-import { ITemplateSelection, ITemplateDefinition } from "../Ifaces/ITemplateSelection";
 import { window, InputBoxOptions } from "vscode";
 
 const templatesConfig: {
@@ -16,9 +15,22 @@ const templatesConfig: {
         prompt: "Object name"
     }],
 };
-export class TemplateSelection implements ITemplateSelection {
 
-    selectTemplate() {
+export type ITemplateDefinition = {
+    label: string,
+    fsName: string,
+    isFolder: boolean,
+    prompt: string,
+}
+
+export type ITemplateSelectionResult = {
+    templateDef: ITemplateDefinition,
+    itemName: string,
+}
+
+export class TemplateSelection {
+
+    public select() {
         const templateNames = templatesConfig.templates.map(entry => entry.label);
 
         return window.showQuickPick(templateNames)

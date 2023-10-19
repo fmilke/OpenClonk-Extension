@@ -1,9 +1,8 @@
-import { ITemplateCreator } from "../Ifaces/ITemplateCreator";
-import { ITemplateDefinition } from "../Ifaces/ITemplateSelection";
+import { ITemplateDefinition } from "../services/TemplateSelection";
 import * as path from 'path';
 import { workspace, Uri, window } from "vscode";
 
-export class TemplateCreator implements ITemplateCreator {
+export class TemplateCreator {
 
     async createFromTemplate(templateDef: ITemplateDefinition, extensionPath: string, itemName: string, pathToParent: string) {
 

@@ -1,11 +1,10 @@
-import { IRunScenarioProvider } from "../Ifaces/IRunScenarioProvider";
 import { spawn } from 'child_process';
 import { exists } from 'fs';
 import * as path from 'path';
 import { OutputChannel, window, workspace } from "vscode";
 
-export class RunScenarioProvider implements IRunScenarioProvider {
-    public runScenarioInEditorMode(pathToScenario: string, outputChannel: OutputChannel) {
+export class ScenarioRunner {
+    public run(pathToScenario: string, outputChannel: OutputChannel) {
         const pathToExecutable = this.getPathToGameExecutable();
 
         if (!pathToExecutable) {
